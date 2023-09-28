@@ -1,0 +1,54 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+body {
+  text-align: center;
+}
+
+main {
+  height: 5rem;
+  background-color: black;
+  margin: 0;
+}
+
+section {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+  display: flex;
+}
+
+.placeArea {
+  width: 100%;
+  background-color: #252525;
+}
+
+.tier {
+  width: 5%;
+}
+
+.Stier {
+  background-color: rgb(255, 127, 127);
+  margin-top: 0px;
+}
+
+.Atier {
+  background-color: rgb(255, 191, 127);
+}
+
+.Btier {
+  background-color: rgb(255, 223, 127);
+}
+
+.Ctier {
+  background-color: rgb(255, 255, 127);
+  ;
+}
+
+.Dtier {
+  background-color: rgb(191, 255, 127);
+}
