@@ -1,34 +1,55 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-let gotten = 0;
-
 function App() {
 
   const [Heroes, setHeroes] = useState([])
 
+
   useEffect(() => {
-    async function dosaker() {
 
-      if (gotten === 0) {
-        await fetch(`https://overfast-api.tekrop.fr/heroes`)
-          .then(res => res.json())
-          .then(result => {
-            console.log(result)
-            setHeroes(result)
-          })
-
-        let heroList = document.getElementById("heroList")
-        Heroes.forEach((hero) => {
-          let name = document.createElement("p")
-          name.innerText = hero.name;
-          heroList.appendChild(name);
-        })
-        gotten = 1
-      }
+    function allowDrop(event) {
+      event.preventDefault();
     }
 
-    dosaker()
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      event.target.appendChild(document.getElementById(data));
+    }
+    async function heroSetup() {
+      await fetch(`https://overfast-api.tekrop.fr/heroes`)
+        .then(res => res.json())
+        .then(result => {
+          console.log(result)
+          setHeroes(result)
+          let heroList = document.getElementById("heroList")
+          result.forEach((hero) => {
+            // let name = document.createElement("p")
+            let img = document.createElement("img")
+            let heroDiv = document.createElement("div")
+            // name.innerText = hero.name;
+            img.src = hero.portrait
+            img.style.width = "5rem"
+            heroDiv.classList.add("heroDiv")
+            heroDiv.draggable = true
+            heroDiv.onDragStart = function () { drag() }
+            // heroDiv.append(name)
+            heroDiv.append(img)
+            heroList.append(heroDiv);
+          })
+        })
+
+
+    }
+
+    document.getElementsByClassName("placeArea").onDrop = function () { drop() }
+    document.getElementsByClassName("placeArea").onDragOver = function () { allowDrop() }
+    document.getElementById("startButton").onclick = function () { heroSetup() }
   })
   return (
     <>

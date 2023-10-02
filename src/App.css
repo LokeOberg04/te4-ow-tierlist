@@ -22,6 +22,15 @@ section {
   display: flex;
 }
 
+.heroDiv {
+  height: 80px;
+}
+
+.heroList {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+}
+
 .placeArea {
   width: 100%;
   background-color: #252525;
